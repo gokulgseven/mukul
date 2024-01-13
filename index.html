@@ -9,12 +9,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
+    h2 {
+    text-align: center;
+}
     .top-section {
-        padding: 15px;
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 45px;
         display: flex;
         justify-content: space-around;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+        border-bottom: 20px;
     }
 
     .dashboard-box {
@@ -24,26 +31,47 @@
         padding: 20px;
         border-radius: 8px;
         text-align: center;
+        border: 2px solid #000000;
 
     }
 
     .table {
         display: flex;
-        padding: 15px;
-        display: flex;
         justify-content: space-around;
 
     }
 
-    .cell {
-        padding: 20px;
+    .row {
+        width:100%
+    }
+
+    .cell-heading {
+        width: 100%;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         text-align: center;
+        border-top: 2px solid #000000;
+        border-bottom: 2px solid #000000;
 
     }
+
+    .cell {
+        width: 100%;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        text-align: center;
+        border-bottom: 1px solid #000000;
+    }
+    
 </style>
 
 <body x-data="main" :style="txt">
     <div>
+        <h2>Ergosphere Dashboard</h2>
 
         <!-- top section that has the order data  -->
         <template x-if="data.orders">
@@ -56,12 +84,13 @@
                 </template>
             </div>
         </template>
+        
 
         <!-- the sales data table  -->
         <div class="table">
             <template x-if="data.year || data.last || data.month">
-                <div class="row">
-                    <div class="cell">period</div>
+                <div class="row" >
+                    <div class="cell-heading" >period</div>
                     <div class="cell">total_sales</div>
                     <div class="cell">net_sales</div>
                     <div class="cell">average_sales</div>
@@ -75,7 +104,7 @@
             </template>
             <template x-if="data.year">
                 <div class="row">
-                    <div class="cell">year</div>
+                    <div class="cell-heading">year</div>
                     <div class="cell" x-text="Math.round(Number(data.year['0']['total_sales'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.year['0']['net_sales'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.year['0']['average_sales'] || '0'))"></div>
@@ -89,7 +118,7 @@
             </template>
             <template x-if="data.last">
                 <div class="row">
-                    <div class="cell">last-month</div>
+                    <div class="cell-heading">last-month</div>
                     <div class="cell" x-text="Math.round(Number(data.last['0']['total_sales'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.last['0']['net_sales'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.last['0']['average_sales'] || '0'))"></div>
@@ -103,7 +132,7 @@
             </template>
             <template x-if="data.month">
                 <div class="row">
-                    <div class="cell">month</div>
+                    <div class="cell-heading">month</div>
                     <div class="cell" x-text="Math.round(Number(data.month['0']['total_sales'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.month['0']['net_sales'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.month['0']['average_sales'] || '0'))"></div>
@@ -119,7 +148,7 @@
             <template x-if="data.customers">
                 <div class="row">
                     <div>
-                        <div class="cell" x-text="data.customers[0].name"></div>
+                        <div class="cell-heading" x-text="data.customers[0].name"></div>
                         <div class="cell" x-text="data.customers[0].total"></div>
                         <div class="cell" x-text="data.customers[1].name"></div>
                         <div class="cell" x-text="data.customers[1].total"></div>
