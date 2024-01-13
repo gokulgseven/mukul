@@ -71,9 +71,6 @@
 
 <body x-data="main" :style="txt">
     <div>
-        <h2>Ergosphere Dashboard</h2>
-
-        <!-- top section that has the order data  -->
         <template x-if="data.orders">
             <div class="top-section">
                 <template x-for="(value, index) in data.orders">
