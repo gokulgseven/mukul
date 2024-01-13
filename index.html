@@ -1,0 +1,218 @@
+<html>
+
+<head>
+
+</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script defer src="/alpine.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    .top-section {
+        padding: 15px;
+        display: flex;
+        justify-content: space-around;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .dashboard-box {
+        background-color: #ffffff;
+        color: #000000;
+        margin: 2px;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+
+    }
+
+    .table {
+        display: flex;
+        padding: 15px;
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .cell {
+        padding: 20px;
+        text-align: center;
+
+    }
+</style>
+
+<body x-data="main" :style="txt">
+    <div>
+
+        <!-- top section that has the order data  -->
+        <template x-if="data.orders">
+            <div class="top-section">
+                <template x-for="(value, index) in data.orders">
+                    <div class="dashboard-box">
+                        <span x-text="value.slug"></span><br>
+                        <span x-text="value.total"></span>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <!-- the sales data table  -->
+        <div class="table">
+            <template x-if="data.year || data.last || data.month">
+                <div class="row">
+                    <div class="cell">period</div>
+                    <div class="cell">total_sales</div>
+                    <div class="cell">net_sales</div>
+                    <div class="cell">average_sales</div>
+                    <div class="cell">total_orders</div>
+                    <div class="cell">total_items</div>
+                    <div class="cell">total_tax</div>
+                    <div class="cell">total_shipping</div>
+                    <div class="cell">total_refunds</div>
+                    <div class="cell">total_discount</div>
+                </div>
+            </template>
+            <template x-if="data.year">
+                <div class="row">
+                    <div class="cell">year</div>
+                    <div class="cell" x-text="Math.round(Number(data.year['0']['total_sales'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.year['0']['net_sales'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.year['0']['average_sales'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.year['0']['total_orders'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.year['0']['total_items'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.year['0']['total_tax'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.year['0']['total_shipping'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.year['0']['total_refunds'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.year['0']['total_discount'] || '0'))"></div>
+                </div>
+            </template>
+            <template x-if="data.last">
+                <div class="row">
+                    <div class="cell">last-month</div>
+                    <div class="cell" x-text="Math.round(Number(data.last['0']['total_sales'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.last['0']['net_sales'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.last['0']['average_sales'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.last['0']['total_orders'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.last['0']['total_items'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.last['0']['total_tax'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.last['0']['total_shipping'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.last['0']['total_refunds'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.last['0']['total_discount'] || '0'))"></div>
+                </div>
+            </template>
+            <template x-if="data.month">
+                <div class="row">
+                    <div class="cell">month</div>
+                    <div class="cell" x-text="Math.round(Number(data.month['0']['total_sales'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.month['0']['net_sales'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.month['0']['average_sales'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.month['0']['total_orders'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.month['0']['total_items'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.month['0']['total_tax'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.month['0']['total_shipping'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.month['0']['total_refunds'] || '0'))"></div>
+                    <div class="cell" x-text="Math.round(Number(data.month['0']['total_discount'] || '0'))"></div>
+                </div>
+            </template>
+            <!-- some aditions to the table  -->
+            <template x-if="data.customers">
+                <div class="row">
+                    <div>
+                        <div class="cell" x-text="data.customers[0].name"></div>
+                        <div class="cell" x-text="data.customers[0].total"></div>
+                        <div class="cell" x-text="data.customers[1].name"></div>
+                        <div class="cell" x-text="data.customers[1].total"></div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <script>
+
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('main', () => ({
+                // variables 
+                id: '',
+                key: '',
+                token: '',
+                txt: "font-size: 24px;",
+                refresh: "300",
+                url: {
+                    orders: "https://ergosphere.in/wp-json/wc/v3/reports/orders/totals",
+                    customers: "https://ergosphere.in/wp-json/wc/v3/reports/customers/totals",
+                    reviews: "https://ergosphere.in/wp-json/wc/v3/reports/reviews/totals",
+                    last: "https://ergosphere.in/wp-json/wc/v3/reports/sales?period=last_month",
+                    month: "https://ergosphere.in/wp-json/wc/v3/reports/sales?period=month",
+                    year: "https://ergosphere.in/wp-json/wc/v3/reports/sales?period=year",
+                    pending: "https://ergosphere.in/wp-json/wc/v3/orders?status=pending",
+                    processing: "https://ergosphere.in/wp-json/wc/v3/orders?status=processing"
+                },
+
+                list: ["orders", "customers", "reviews", "last", "month", "year", "pending", "processing"],
+                data: {},
+
+
+                // api calls 
+                async api(url, variable) {
+                    let options = {
+                        method: 'GET',
+                        headers: { "Authorization": `Basic ${this.token}` },
+                        redirect: 'follow'
+                    };
+
+                    try {
+                        let response = await fetch(url, options)
+                        let result = await response.json()
+
+                        // fix for certain calls , removing data not required 
+                        if (["last", "month", "year"].includes(variable)) {
+                            delete result["0"]._links
+                            delete result["0"].totals
+                            delete result["0"].totals_grouped_by
+                            delete result["0"].total_shipping
+                        }
+
+                        if (variable == "orders") {
+                            result = result.filter(obj => !(obj.slug == "on-hold" || obj.slug == "checkout-draft"));
+                        }
+
+                        // data saved 
+                        this.data[variable] = result
+                        console.log(variable, "data recieved")
+
+                    } catch (error) {
+                        console.log("error in", variable, error)
+                    }
+                },
+
+                // refresh script 
+                async startRefreshing() {
+                    let num = Number(this.refresh)
+                    setInterval(async () => {
+                        for (const i of this.list) this.api(this.url[i], i)
+                    }, num  * 1000); 
+                },
+
+                init() {
+                    urlSearchParams = new URLSearchParams(window.location.search);
+                    this.id = urlSearchParams.get('id')
+                    this.key = urlSearchParams.get('key')
+                    this.txt = `font-size: ${urlSearchParams.get('txt') || "24"}px`
+                    this.refresh = urlSearchParams.get('refresh') || "300"
+                    this.token = btoa(`${this.id}:${this.key}`)
+                    for (const i of this.list) this.data[i] = false
+                    for (const i of this.list) this.api(this.url[i], i)
+                    this.startRefreshing();
+
+
+                }
+            }))
+
+        })
+
+    </script>
+</body>
+
+</html>
