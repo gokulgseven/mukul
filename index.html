@@ -10,8 +10,9 @@
 
 <style>
     h2 {
-    text-align: center;
-}
+        text-align: center;
+    }
+
     .top-section {
         padding-top: 15px;
         padding-left: 15px;
@@ -42,15 +43,15 @@
     }
 
     .row {
-        width:100%
+        width: 100%
     }
 
     .cell-heading {
         width: 100%;
         margin-left: 20px;
         margin-right: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         text-align: center;
         border-top: 2px solid #000000;
         border-bottom: 2px solid #000000;
@@ -61,16 +62,36 @@
         width: 100%;
         margin-left: 20px;
         margin-right: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
         text-align: center;
         border-bottom: 1px solid #000000;
     }
+
+    .table2 {
+        border-collapse: collapse;
+    }
+
+    .row-head{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border-top: 2px solid #000000;
+        border-bottom: 2px solid #000000;
+       
+    }
+    .row-cell{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        border-bottom: 1px solid #000000;
     
+    }
 </style>
 
 <body x-data="main" :style="txt">
     <div>
+        <!-- top sectopn  -->
         <template x-if="data.orders">
             <div class="top-section">
                 <template x-for="(value, index) in data.orders">
@@ -81,68 +102,68 @@
                 </template>
             </div>
         </template>
-        
+
 
         <!-- the sales data table  -->
         <div class="table">
-            <template x-if="data.year || data.last || data.month">
-                <div class="row" >
-                    <div class="cell-heading" >period</div>
+            <template x-if="(data.year || data.last || data.month) &&  (mode == 'both' || mode == 'price')">
+                <div class="row">
+                    <div class="cell-heading">period</div>
                     <div class="cell">total_sales</div>
-                    <div class="cell">net_sales</div>
+                    <!-- <div class="cell">net_sales</div> -->
                     <div class="cell">average_sales</div>
                     <div class="cell">total_orders</div>
-                    <div class="cell">total_items</div>
-                    <div class="cell">total_tax</div>
-                    <div class="cell">total_shipping</div>
+                    <!-- <div class="cell">total_items</div> -->
+                    <!-- <div class="cell">total_tax</div> -->
+                    <!-- <div class="cell">total_shipping</div> -->
                     <div class="cell">total_refunds</div>
                     <div class="cell">total_discount</div>
                 </div>
             </template>
-            <template x-if="data.year">
+            <template x-if="data.year &&  (mode == 'both' || mode == 'price')">
                 <div class="row">
                     <div class="cell-heading">year</div>
                     <div class="cell" x-text="Math.round(Number(data.year['0']['total_sales'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.year['0']['net_sales'] || '0'))"></div>
+                    <!-- <div class="cell" x-text="Math.round(Number(data.year['0']['net_sales'] || '0'))"></div> -->
                     <div class="cell" x-text="Math.round(Number(data.year['0']['average_sales'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.year['0']['total_orders'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.year['0']['total_items'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.year['0']['total_tax'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.year['0']['total_shipping'] || '0'))"></div>
+                    <!-- <div class="cell" x-text="Math.round(Number(data.year['0']['total_items'] || '0'))"></div> -->
+                    <!-- <div class="cell" x-text="Math.round(Number(data.year['0']['total_tax'] || '0'))"></div> -->
+                    <!-- <div class="cell" x-text="Math.round(Number(data.year['0']['total_shipping'] || '0'))"></div> -->
                     <div class="cell" x-text="Math.round(Number(data.year['0']['total_refunds'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.year['0']['total_discount'] || '0'))"></div>
                 </div>
             </template>
-            <template x-if="data.last">
+            <template x-if="data.last &&  (mode == 'both' || mode == 'price')">
                 <div class="row">
                     <div class="cell-heading">last-month</div>
                     <div class="cell" x-text="Math.round(Number(data.last['0']['total_sales'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.last['0']['net_sales'] || '0'))"></div>
+                    <!-- <div class="cell" x-text="Math.round(Number(data.last['0']['net_sales'] || '0'))"></div> -->
                     <div class="cell" x-text="Math.round(Number(data.last['0']['average_sales'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.last['0']['total_orders'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.last['0']['total_items'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.last['0']['total_tax'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.last['0']['total_shipping'] || '0'))"></div>
+                    <!-- <div class="cell" x-text="Math.round(Number(data.last['0']['total_items'] || '0'))"></div> -->
+                    <!-- <div class="cell" x-text="Math.round(Number(data.last['0']['total_tax'] || '0'))"></div> -->
+                    <!-- <div class="cell" x-text="Math.round(Number(data.last['0']['total_shipping'] || '0'))"></div> -->
                     <div class="cell" x-text="Math.round(Number(data.last['0']['total_refunds'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.last['0']['total_discount'] || '0'))"></div>
                 </div>
             </template>
-            <template x-if="data.month">
+            <template x-if="data.month &&  (mode == 'both' || mode == 'price')">
                 <div class="row">
                     <div class="cell-heading">month</div>
                     <div class="cell" x-text="Math.round(Number(data.month['0']['total_sales'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.month['0']['net_sales'] || '0'))"></div>
+                    <!-- <div class="cell" x-text="Math.round(Number(data.month['0']['net_sales'] || '0'))"></div> -->
                     <div class="cell" x-text="Math.round(Number(data.month['0']['average_sales'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.month['0']['total_orders'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.month['0']['total_items'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.month['0']['total_tax'] || '0'))"></div>
-                    <div class="cell" x-text="Math.round(Number(data.month['0']['total_shipping'] || '0'))"></div>
+                    <!-- <div class="cell" x-text="Math.round(Number(data.month['0']['total_items'] || '0'))"></div> -->
+                    <!-- <div class="cell" x-text="Math.round(Number(data.month['0']['total_tax'] || '0'))"></div> -->
+                    <!-- <div class="cell" x-text="Math.round(Number(data.month['0']['total_shipping'] || '0'))"></div> -->
                     <div class="cell" x-text="Math.round(Number(data.month['0']['total_refunds'] || '0'))"></div>
                     <div class="cell" x-text="Math.round(Number(data.month['0']['total_discount'] || '0'))"></div>
                 </div>
             </template>
             <!-- some aditions to the table  -->
-            <template x-if="data.customers">
+            <template x-if="data.customers &&  (mode == 'both' || mode == 'price')">
                 <div class="row">
                     <div>
                         <div class="cell-heading" x-text="data.customers[0].name"></div>
@@ -153,6 +174,59 @@
                 </div>
             </template>
         </div>
+
+        <br>
+
+        <!-- bottom section  "pending", "processing" -->
+        <table class="table2" :style="txt">
+            <template x-if="(data.pending || data.processing) &&  (mode == 'both' || mode == 'orders') ">
+                <tr class="row-head">
+                    <td class="table-head">date_created</td>
+                    <td class="table-head">status</td>
+                    <td class="table-head">name</td>
+                    <td class="table-head">location</td>
+                    <td class="table-head">phone</td>
+                    <!-- <td class="table-head">email</td> -->
+                    <td class="table-head">item</td>
+                    <td class="table-head">total</td>
+                </tr>
+            </template>
+            <template x-if="data.processing &&  (mode == 'both' || mode == 'orders')">
+                    <template x-for="(value, index) in data.processing">
+                        <tr class="row-cell">
+                           
+                                <td class="table-cell" x-text="new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit' }).format(new Date(value.date_created));"></td>
+                                <td class="table-cell" x-text="value.status"></td>
+                                <td class="table-cell" x-text="value.billing.first_name + ' ' + value.billing.last_name"></td>
+                                <td class="table-cell" x-text="value.shipping.state != '' ? value.shipping.state + ' ' + value.shipping.city : value.billing.state + ' ' + value.billing.city "></td> 
+                                <td class="table-cell" x-text="value.billing.phone"></td>
+                                <!-- <td class="table-cell" x-text="value.billing.email"></td> -->
+                                <td class="table-cell" x-text="value.line_items.map((obj, index) => index + 1 + ')'+ obj.name).join(', ')"></td>
+                                <td class="table-cell" x-text="value.total"></td>
+                   
+                        </tr>
+                    </template>
+            </template>
+            <template x-if="data.pending &&  (mode == 'both' || mode == 'orders')">
+                <template x-for="(value, index) in data.pending">
+                    <tr class="row-cell">
+                       
+
+                            <td class="table-cell" x-text="new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit' }).format(new Date(value.date_created));"></td>
+                            <td class="table-cell" x-text="value.status"></td>
+                            <td class="table-cell" x-text="value.billing.first_name + ' ' + value.billing.last_name"></td>
+                            <td class="table-cell" x-text="value.shipping.state != '' ? value.shipping.state + ' ' + value.shipping.city : value.billing.state + ' ' + value.billing.city "></td> 
+                            <td class="table-cell" x-text="value.billing.phone"></td>
+                            <!-- <td class="table-cell" x-text="value.billing.email"></td> -->
+                            <td class="table-cell" x-text="value.line_items.map((obj, index) => index + 1 + ')'+ obj.name).join(', ')"></td>
+                            <td class="table-cell" x-text="value.total"></td>
+               
+                    </tr>
+                </template>
+        </template>
+        </table>
+
+
     </div>
 
     <script>
@@ -165,6 +239,7 @@
                 token: '',
                 txt: "font-size: 24px;",
                 refresh: "300",
+                mode: "both",
                 url: {
                     orders: "https://ergosphere.in/wp-json/wc/v3/reports/orders/totals",
                     customers: "https://ergosphere.in/wp-json/wc/v3/reports/customers/totals",
@@ -192,21 +267,27 @@
                         let response = await fetch(url, options)
                         let result = await response.json()
 
-                        // fix for certain calls , removing data not required 
-                        if (["last", "month", "year"].includes(variable)) {
-                            delete result["0"]._links
-                            delete result["0"].totals
-                            delete result["0"].totals_grouped_by
-                            delete result["0"].total_shipping
-                        }
 
                         if (variable == "orders") {
                             result = result.filter(obj => !(obj.slug == "on-hold" || obj.slug == "checkout-draft"));
                         }
 
+                        // console.log(result)
+
                         // data saved 
                         this.data[variable] = result
-                        console.log(variable, "data recieved")
+                        // console.log(variable, "data recieved")
+
+                        if (variable == "processing"){
+                            console.log(this.data.processing)
+                            for (const i of this.data.processing){
+                                console.log(i)
+                            }
+                        }
+
+                        
+
+
 
                     } catch (error) {
                         console.log("error in", variable, error)
@@ -218,7 +299,7 @@
                     let num = Number(this.refresh)
                     setInterval(async () => {
                         for (const i of this.list) this.api(this.url[i], i)
-                    }, num  * 1000); 
+                    }, num * 1000);
                 },
 
                 init() {
@@ -227,6 +308,7 @@
                     this.key = urlSearchParams.get('key')
                     this.txt = `font-size: ${urlSearchParams.get('txt') || "24"}px`
                     this.refresh = urlSearchParams.get('refresh') || "300"
+                    this.mode = urlSearchParams.get('mode') || "both"
                     this.token = btoa(`${this.id}:${this.key}`)
                     for (const i of this.list) this.data[i] = false
                     for (const i of this.list) this.api(this.url[i], i)
