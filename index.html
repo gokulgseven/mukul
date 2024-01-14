@@ -50,8 +50,8 @@
         width: 100%;
         margin-left: 20px;
         margin-right: 20px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
         text-align: center;
         border-top: 2px solid #000000;
         border-bottom: 2px solid #000000;
@@ -62,8 +62,8 @@
         width: 100%;
         margin-left: 20px;
         margin-right: 20px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
         text-align: center;
         border-bottom: 1px solid #000000;
     }
@@ -74,22 +74,25 @@
         table-layout: fixed;
     }
 
-    .row-head{
+    .row-head {
         margin: 0;
-        padding: 0;
+        padding-top: 5px;
+        padding-bottom: 5px;
         box-sizing: border-box;
         border-top: 2px solid #000000;
         border-bottom: 2px solid #000000;
         text-align: center;
-       
+
     }
-    .row-cell{
+
+    .row-cell {
         margin: 0;
-        padding: 0;
+        padding-top: 5px;
+        padding-bottom: 5px;
         box-sizing: border-box;
         border-bottom: 1px solid #000000;
         text-align: center;
-    
+
     }
 </style>
 
@@ -195,39 +198,49 @@
                     <td class="table-head">total</td>
                 </tr>
             </template>
-            <template x-if="data.processing &&  (mode == 'both' || mode == 'orders')">
-                    <template x-for="(value, index) in data.processing">
-                        <tr class="row-cell">
-                           
-                                <td class="table-cell" x-text="new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit' }).format(new Date(value.date_created));"></td>
-                                <td class="table-cell" x-text="value.status"></td>
-                                <td class="table-cell" x-text="value.billing.first_name + ' ' + value.billing.last_name"></td>
-                                <td class="table-cell" x-text="value.shipping.state != '' ? value.shipping.state + ' ' + value.shipping.city : value.billing.state + ' ' + value.billing.city "></td> 
-                                <td class="table-cell" x-text="value.billing.phone"></td>
-                                <!-- <td class="table-cell" x-text="value.billing.email"></td> -->
-                                <td class="table-cell" x-text="value.line_items.map((obj, index) => index + 1 + ')'+ obj.name).join(', ')"></td>
-                                <td class="table-cell" x-text="value.total"></td>
-                   
-                        </tr>
-                    </template>
-            </template>
             <template x-if="data.pending &&  (mode == 'both' || mode == 'orders')">
                 <template x-for="(value, index) in data.pending">
                     <tr class="row-cell">
-                       
 
-                            <td class="table-cell" x-text="new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit' }).format(new Date(value.date_created));"></td>
-                            <td class="table-cell" x-text="value.status"></td>
-                            <td class="table-cell" x-text="value.billing.first_name + ' ' + value.billing.last_name"></td>
-                            <td class="table-cell" x-text="value.shipping.state != '' ? value.shipping.state + ' ' + value.shipping.city : value.billing.state + ' ' + value.billing.city "></td> 
-                            <td class="table-cell" x-text="value.billing.phone"></td>
-                            <!-- <td class="table-cell" x-text="value.billing.email"></td> -->
-                            <td class="table-cell" x-text="value.line_items.map((obj, index) => index + 1 + ')'+ obj.name).join(', ')"></td>
-                            <td class="table-cell" x-text="value.total"></td>
-               
+
+                        <td class="table-cell"
+                            x-text="new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit' }).format(new Date(value.date_created));">
+                        </td>
+                        <td class="table-cell" x-text="value.status"></td>
+                        <td class="table-cell" x-text="value.billing.first_name + ' ' + value.billing.last_name"></td>
+                        <td class="table-cell"
+                            x-text="value.shipping.state != '' ? value.shipping.state + ' ' + value.shipping.city : value.billing.state + ' ' + value.billing.city ">
+                        </td>
+                        <td class="table-cell" x-text="value.billing.phone"></td>
+                        <!-- <td class="table-cell" x-text="value.billing.email"></td> -->
+                        <td class="table-cell"
+                            x-text="value.line_items.map((obj, index) => index + 1 + ')'+ obj.name).join(', ')"></td>
+                        <td class="table-cell" x-text="value.total"></td>
+
                     </tr>
                 </template>
-        </template>
+            </template>
+            <template x-if="data.processing &&  (mode == 'both' || mode == 'orders')">
+                <template x-for="(value, index) in data.processing">
+                    <tr class="row-cell">
+
+                        <td class="table-cell"
+                            x-text="new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit' }).format(new Date(value.date_created));">
+                        </td>
+                        <td class="table-cell" x-text="value.status"></td>
+                        <td class="table-cell" x-text="value.billing.first_name + ' ' + value.billing.last_name"></td>
+                        <td class="table-cell"
+                            x-text="value.shipping.state != '' ? value.shipping.state + ' ' + value.shipping.city : value.billing.state + ' ' + value.billing.city ">
+                        </td>
+                        <td class="table-cell" x-text="value.billing.phone"></td>
+                        <!-- <td class="table-cell" x-text="value.billing.email"></td> -->
+                        <td class="table-cell"
+                            x-text="value.line_items.map((obj, index) => index + 1 + ')'+ obj.name).join(', ')"></td>
+                        <td class="table-cell" x-text="value.total"></td>
+
+                    </tr>
+                </template>
+            </template>
         </table>
 
 
@@ -282,14 +295,14 @@
                         this.data[variable] = result
                         // console.log(variable, "data recieved")
 
-                        if (variable == "processing"){
+                        if (variable == "processing") {
                             console.log(this.data.processing)
-                            for (const i of this.data.processing){
+                            for (const i of this.data.processing) {
                                 console.log(i)
                             }
                         }
 
-                        
+
 
 
 
