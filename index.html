@@ -219,7 +219,7 @@
         <!-- bottom section  "pending", "processing" -->
         <div style="overflow: auto;width: 100%;">
             <table class="table2" :style="txt">
-                <template x-if="(data.pending || data.processing) &&  (mode == 'both' || mode == 'orders') ">
+                <template x-if="(data.pending || data.processing || data.completed) &&  (mode == 'both' || mode == 'orders') ">
                     <thead>
                         <tr class="row-head">
                             <td class="table-head">date_created</td>
@@ -286,6 +286,33 @@
                         </tbody>
                     </template>
                 </template>
+                <template x-if="data.completed &&  (mode == 'both' || mode == 'orders')">
+                    <template x-for="(value, index) in data.completed">
+                        <tbody>
+                            <tr class="row-cell">
+
+
+                                <td class="table-cell"
+                                    x-text="new Intl.DateTimeFormat('en-US', { month: 'short', day: '2-digit' }).format(new Date(value.date_created));">
+                                </td>
+                                <td class="table-cell" x-text="value.status"></td>
+                                <td class="table-cell"
+                                    x-text="value.billing.first_name + ' ' + value.billing.last_name">
+                                </td>
+                                <td class="table-cell"
+                                    x-text="value.shipping.state != '' ? value.shipping.state + ' ' + value.shipping.city : value.billing.state + ' ' + value.billing.city ">
+                                </td>
+                                <td class="table-cell" x-text="value.billing.phone"></td>
+                                <!-- <td class="table-cell" x-text="value.billing.email"></td> -->
+                                <td class="table-cell"
+                                    x-text="value.line_items.map((obj, index) => index + 1 + ')'+ obj.name).join(', ')">
+                                </td>
+                                <td class="table-cell" x-text="value.total"></td>
+
+                            </tr>
+                        </tbody>
+                    </template>
+                </template>
             </table>
         </div>
 
@@ -310,10 +337,11 @@
                     month: "/wp-json/wc/v3/reports/sales?period=month",
                     year: "/wp-json/wc/v3/reports/sales?period=year",
                     pending: "/wp-json/wc/v3/orders?status=pending",
-                    processing: "/wp-json/wc/v3/orders?status=processing"
+                    processing: "/wp-json/wc/v3/orders?status=processing",
+                    completed: "/wp-json/wc/v3/orders?status=completed"
                 },
 
-                list: ["orders", "customers", "reviews", "last", "month", "year", "pending", "processing"],
+                list: ["orders", "customers", "reviews", "last", "month", "year", "pending", "processing", "completed"],
                 data: {},
 
 
